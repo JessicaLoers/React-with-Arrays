@@ -4,6 +4,7 @@ import "./App.css";
 import "./styles.css";
 
 export default function App() {
+  // Array of pokemons, each with an id, name, types, and image URL
   const pokemons = [
     {
       id: "448",
@@ -39,15 +40,34 @@ export default function App() {
     <main className="app">
       <h1 className="app__title">Pokédex</h1>
       <ul className="app__pokemons">
-        <li>
-          <PokemonCard
-            id="448"
-            name="Lucario"
-            types="fighting, steel"
-            image="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/448.svg"
-          />
-        </li>
+        {
+          // Mapping each pokemon to an <li> element - explicit return
+          pokemons.map((pokemon) => {
+            return (
+              // Each pokemon is represented by a list item
+              <li key={pokemon.id}>
+                {/* PokemonCard component is used to display each pokemon's */}
+                details
+                <PokemonCard
+                  id={pokemon.id}
+                  name={pokemon.name}
+                  types={pokemon.types}
+                  image={pokemon.image}
+                />
+              </li>
+            );
+          })
+        }
       </ul>
     </main>
   );
 }
+
+/* Implied return ⬇️
+<ul className="App__pokemons">
+  {pokemons.map((pokemon) => (
+    <li>{pokemon.name}</li>
+  ))}
+</ul>
+
+*/
